@@ -1,0 +1,10 @@
+
+- Collision shape of mono-hull ASV. Currently there is a bug in collisions between ASVs -- they pass through each other.  
+
+- Sensor plugins for the ASV: compass, GPS position sensor and Wi-Fi communication module.
+
+- Model plugin for the ASV controller
+
+- Extending the world with a swarm of ASVs 
+
+- Calibrate the mono-hull ASV hydrodynamic parameters of linear damping. Use trajectory logs of the physical ASV from https://zenodo.org/record/45570#.V_tuj5MrKEI 
