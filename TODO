@@ -8,3 +8,6 @@
 - Extending the world with a swarm of ASVs 
 
 - Calibrate the mono-hull ASV hydrodynamic parameters of linear damping. Use trajectory logs of the physical ASV from https://zenodo.org/record/45570#.V_tuj5MrKEI 
+
+- Implement the forces and torques consequent to the added mass of the ASV. 
+  Currently Gazebo only supports a scalar quantity for the mass of a rigid body. Therefore it is problematic to add different added mass components for the x, y and z directions due to accelerationss in the x, y and z directions. We have not yet decided how to resolve this issue.  
