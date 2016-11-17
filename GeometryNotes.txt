@@ -1,0 +1,74 @@
+Dimensions of boat in meters;
+
+
+Weight = 3Kg
+
+Volume = 0.0069940 m^3
+Meshlab approximates the volume for the weight (Meshlab assumes the body has unit density). So the weight of the body is 0.0069940. But what is the unit of this weight? Lets assume its in kg
+
+/*If we assume it is in grams (as 6993.62Kg would be a very large weight for this ASV), the moments values are about two orders of magnitude higher than analytically computed values. So let us assume the weight is in Kg.*/
+
+
+Bounding Box Volume = 0.653082 x 0.386710 x 0.100004 = 0.02525634423 m^3 [See the percentge reduction in volume to help you approx the buoyancy force]
+
+
+
+Ixx unit is Kg.m^2
+Weight used to calcuate Ixx is 0.0069940 Kg. As the actual weight of the object is 3Kg, we divide Ixx by 0.0069940/3;
+/*Also the distances are to be in meters^2 and not centimeters^2; so we multiply Ixx by 10^-4*/
+
+
+
+Inertia Tensor is :
+MI = [0.000057 -0.000000 0.000001
+-0.000000 0.000184 0.000000
+ 0.000001 0.000000 0.000234]
+
+
+>> MI*(3kg/0.0069940kg)
+
+    0.0244         0    0.0004
+         0    0.0789         0
+    0.0004         0    0.100
+
+
+/* if we scale weight by 1000
+MI*(3/6.993627930)
+
+ans =
+
+   24.5429   -0.0186    0.5870
+   -0.0186   78.7861    0.0001
+    0.5870    0.0001  100.4999
+*/
+    
+Thin shell barycenter -0.04858580 0.0.0000179 0.06972409  in cm
+Center of Mass is -0.03708225 0.0000159 0.06730298 in cm
+
+
+=================================================================================================================================
+Boat dimensions in meters, with scale x=10; So all dimensions are scaled by 10.
+
+Weight = 3 kg
+
+Mesh Bounding Box Size 6.530820 3.867100 1.000038
+
+Mesh Volume is 6.993628
+
+Bounding box volume = 25.25634423 m^3
+
+Thin shell barycenter -0.485857 0.000018 0.697240
+Center of Mass is -0.370822 0.000016 0.673030
+
+Inertia Tensor is :
+
+MI = [5.721460 -0.004347 0.136845
+-0.004347 18.366682 0.000024
+0.136845 0.000024 23.428637]
+
+MI*(3/6.993628)
+ans =
+
+    2.4543   -0.0019    0.0587
+   -0.0019    7.8786    0.0000
+    0.0587    0.0000   10.0500
