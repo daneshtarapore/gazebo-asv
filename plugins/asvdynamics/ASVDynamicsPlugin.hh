@@ -28,6 +28,8 @@
 #include "gazebo/math/Vector3.hh"
 #include "gazebo/physics/physics.hh"
 
+//#define DEBUG_MESSAGES
+
 namespace gazebo
 {
 //  /// \brief A class for storing the volume properties of a link.

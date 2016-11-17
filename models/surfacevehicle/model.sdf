@@ -7,8 +7,8 @@
       <!--<gravity>0</gravity>-->
       <pose>0 0 0 0 0 0</pose>
       <inertial>
-        <!-- IF WE COULD SIMULATE ADDED MASS IN GAZEBO, THEN THE BELOW MASS MATRIX WOULD BE SET AS MASS OF RIGID BODY (MRB) + THE ADDED MASS (MA)
-        <mass>3.0</mass> <!-- scale mass by 1 -->
+        <!-- IF WE COULD SIMULATE ADDED MASS IN GAZEBO, THEN THE BELOW MASS MATRIX WOULD BE SET AS MASS OF RIGID BODY (MRB) + THE ADDED MASS (MA)-->
+        <mass>3.0</mass>
         <!--<pose >-0.037 0 0.067 0 0 0</pose> -->  <!-- center of mass -->
         <pose> -0.04 0 0.067  0 0 0</pose> <!-- center of mass -->
         <inertia>
@@ -18,7 +18,7 @@
           <ixz>0.0</ixz>
           <iyy>0.0788</iyy>
           <iyz>0.0</iyz>
-          <izz>1.4602</izz> <!-- izz + nr1 -->
+          <izz>0.1005</izz>
 
           <!-- scaling factor 1000
           <ixx>24.5429</ixx>
@@ -51,7 +51,7 @@
       <visual name='body_visual'>
         <geometry>
           <mesh>
-            <uri>model://surfacevehicle/meshes/proto7_cleaned_1.dae</uri>
+            <uri>model://surfacevehicle/meshes/proto7_meters.dae</uri>
           </mesh>
         </geometry>
       </visual>

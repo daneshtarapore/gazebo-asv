@@ -29,8 +29,7 @@ GZ_REGISTER_MODEL_PLUGIN(ASVDynamicsPlugin)
 
 /////////////////////////////////////////////////
 ASVDynamicsPlugin::ASVDynamicsPlugin()
-// Density of liquid water at 1 atm pressure and 15 degrees Celsius.
-    : fluidDensity(999.1026)
+    : fluidDensity(999.1026) // Density of liquid water at 1 atm pressure and 15 degrees Celsius.
 {
 }
 
@@ -51,11 +50,6 @@ void ASVDynamicsPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
     this->water_level                     = this->sdf->Get<double>("water_level");
     this->volume_of_boat                  = this->sdf->Get<double>("boat_volume");
     this->volume_of_boundingbox           = this->sdf->Get<double>("boat_boundingbox_volume");
-
-    /*this->cBoundingBoxLength              =  linkElem->GetElement("boat_boundingbox_dimensions")->Get<math::Vector3>();
-    this->center_of_volume_boat           =  linkElem->GetElement("boat_center_of_volume")->Get<math::Vector3>();
-    this->dampingforcelinearcoefficients  =  linkElem->GetElement("damping_force_linear_coefficients")->Get<math::Vector3>();
-    this->dampingtorquelinearcoefficients =  linkElem->GetElement("damping_torque_linear_coefficients")->Get<math::Vector3>();*/
 
     this->cBoundingBoxLength              =  this->sdf->Get<math::Vector3>("boat_boundingbox_dimensions");
     this->center_of_volume_boat           =  this->sdf->Get<math::Vector3>("boat_center_of_volume");
@@ -198,11 +192,14 @@ void ASVDynamicsPlugin::Init()
     GZ_ASSERT(ixy_rb == 0.0f, "Moment ixy should be at 0");
     GZ_ASSERT(ixz_rb == 0.0f, "Moment ixz should be at 0");
     GZ_ASSERT(iyz_rb == 0.0f, "Moment iyz should be at 0");
+
+#ifdef DEBUG_MESSAGES
     std::cout << "m " << m_rb << std::endl;
     std::cout << "ixx " << ixx_rb << std::endl;
     std::cout << "iyy " << iyy_rb << std::endl;
     std::cout << "izz " << izz_rb << std::endl;
     std::cout << "CoM " << link->GetInertial()->GetPose() << std::endl;
+#endif
 }
 
 /////////////////////////////////////////////////
@@ -248,8 +245,7 @@ void ASVDynamicsPlugin::OnUpdate()
         math::Pose linkFrame = link->GetWorldPose();
         math::Vector3 pos = linkFrame.pos;
         math::Vector3 rot_euler = linkFrame.rot.GetAsEuler();
-        std::cout << " pos " << pos << std::endl;
-        std::cout << " rot " << rot_euler << std::endl;
+
 
         //float water_level = 10.0f; //m
         //volume_displaced_fluid = 0.0f;
@@ -257,7 +253,9 @@ void ASVDynamicsPlugin::OnUpdate()
         {
             // Body is completely above water surface
             volume_displaced_fluid = 0.0f;
+#ifdef DEBUG_MESSAGES
             std::cout << "Body is completely above water surface " << std::endl;
+#endif
         }
         else if((pos.z + cBoundingBoxLength.z) < water_level)
         {
@@ -267,7 +265,9 @@ void ASVDynamicsPlugin::OnUpdate()
             //center_volume_displaced_fluid.x = center_of_volume_boat.x;
             //center_volume_displaced_fluid.y = center_of_volume_boat.y;
             center_volume_displaced_fluid.z = center_of_volume_boat.z;
+#ifdef DEBUG_MESSAGES
             std::cout << "Body is completely submerged under water " << std::endl;
+#endif
         }
         else
         {
@@ -276,7 +276,9 @@ void ASVDynamicsPlugin::OnUpdate()
             //center_volume_displaced_fluid.x = center_of_volume_boat.x;
             //center_volume_displaced_fluid.y = center_of_volume_boat.y;
             center_volume_displaced_fluid.z = boundingbox_depth_underwater/2.0f;
+#ifdef DEBUG_MESSAGES
             std::cout << "Body is partially submerged under water " << std::endl;
+#endif
         }
 
         if(volume_displaced_fluid == 0.0f)
@@ -289,7 +291,6 @@ void ASVDynamicsPlugin::OnUpdate()
             //std::cout << " BB.volume               " << (cBoundingBox.GetXLength() * cBoundingBox.GetYLength() * cBoundingBox.GetZLength()) << std::endl;
             //! 0.006994f m^2 is the volume of the boat (courtesy Meshlabs)
             volume_displaced_fluid *= volume_of_boat / volume_of_boundingbox; //(cBoundingBoxLength.x * cBoundingBoxLength.y * cBoundingBoxLength.z);
-            std::cout << "approx. volume_displaced_fluid " << volume_displaced_fluid << std::endl;
 
 
             // By Archimedes' principle,
@@ -297,14 +298,12 @@ void ASVDynamicsPlugin::OnUpdate()
             // object_density = mass/volume, so the mass term cancels.
             // Therefore,
             math::Vector3 buoyancy_force = - volume_displaced_fluid * this->fluidDensity * this->model->GetWorld()->Gravity();
-            std::cout << "buoyancy_force (world frame)" << buoyancy_force << " with g=" << this->model->GetWorld()->Gravity().Z() << std::endl;
 
             // rotate buoyancy into the link frame
             /*math::Vector3 buoyancyforce_bodyframe = math::Vector3(-buoyancy_force.z * sin(rot_euler.y),
                                                                   buoyancy_force.z * cos(rot_euler.y) * sin(rot_euler.x),
                                                                   buoyancy_force.z * cos(rot_euler.y) * cos(rot_euler.x));*/
             math::Vector3 buoyancyforce_bodyframe = linkFrame.rot.GetInverse().RotateVector(buoyancy_force);
-            std::cout << "buoyancyforce_bodyframe " << buoyancyforce_bodyframe << " center_volume_displaced_fluid " << center_volume_displaced_fluid << std::endl;
             //!link->AddLinkForce(buoyancyforce_bodyframe, center_volume_displaced_fluid);
             total_force += buoyancyforce_bodyframe;
 
@@ -319,7 +318,7 @@ void ASVDynamicsPlugin::OnUpdate()
                                           (center_mass.z - center_volume_displaced_fluid.z))*sin(rot_euler.y));
 
             buoyancytorque_bodyframe.z = 0.0f;
-            std::cout << "buoyancytorque_bodyframe " << buoyancytorque_bodyframe << std::endl;
+
             //!link->AddTorque(buoyancytorque_bodyframe);
             total_torque += buoyancytorque_bodyframe;
 
@@ -340,9 +339,7 @@ void ASVDynamicsPlugin::OnUpdate()
 
 
 
-            math::Vector3 linearvelocity_worldframe = link->GetWorldLinearVel();
-            std::cout << "linearvelocity_worldframe " << linearvelocity_worldframe << std::endl;
-            std::cout << "linearvelocity relative " << link->GetRelativeLinearVel()  << std::endl;
+
 
             math::Vector3 dampingForce = math::Vector3(dampingforcelinearcoefficients.x * link->GetRelativeLinearVel().x,
                                                        dampingforcelinearcoefficients.y * link->GetRelativeLinearVel().y,
@@ -352,7 +349,7 @@ void ASVDynamicsPlugin::OnUpdate()
             //std::cout << " rotated dampingforce " << rotateddampingForce << std::endl;
             //!link->AddLinkForce(dampingForce, center_mass);
             total_force += -dampingForce;
-            std::cout << " dampingforce " << dampingForce << std::endl;
+
 
 
 
@@ -360,14 +357,12 @@ void ASVDynamicsPlugin::OnUpdate()
                                                         dampingtorquelinearcoefficients.y * link->GetRelativeAngularVel().y,
                                                         dampingtorquelinearcoefficients.z * link->GetRelativeAngularVel().z);
 
-            std::cout << " angularvelocity_worldframe " << link->GetWorldAngularVel() << std::endl;
-            std::cout << " angularvelocity relative " << link->GetRelativeAngularVel() << std::endl;
-            std::cout << " dampingTorque " << dampingTorque << std::endl;
+
 
             //!link->AddTorque(dampingTorque);
             total_torque += -dampingTorque;
 
-            std::cout << "Relative torque " << link->GetRelativeTorque() << std::endl;
+
 
 
             /*
@@ -381,8 +376,7 @@ void ASVDynamicsPlugin::OnUpdate()
             total_force  += -coriolis_force;
             total_torque += -coriolis_torque;
 
-            std::cout << "coriolis force " << coriolis_force << std::endl;
-            std::cout << "coriolis torque" << coriolis_torque << std::endl;
+
 
 
             /*
@@ -402,7 +396,7 @@ void ASVDynamicsPlugin::OnUpdate()
              *  Thrust forces
              */
             double left_propeller_thrust, right_propeller_thrust;
-            if(link->IsSelected())
+            if(model->GetWorld()->GetEntity("surfacevehicle")->IsSelected()) // Does not work
             {
                 std::cout << "Link is selected " << std::endl;
             }
@@ -422,7 +416,7 @@ void ASVDynamicsPlugin::OnUpdate()
 
             total_force  += (left_propeller_thrust_force + right_propeller_thrust_force);
 
-            std::cout << " total_thrust_force " << (left_propeller_thrust_force + right_propeller_thrust_force) << std::endl;
+
 
 
             math::Vector3 left_propeller_thrust_torque, right_propeller_thrust_torque;
@@ -434,8 +428,6 @@ void ASVDynamicsPlugin::OnUpdate()
             total_torque += left_propeller_thrust_torque;
             total_torque += right_propeller_thrust_torque;
 
-            std::cout << "left_propeller_torque " <<  left_propeller_thrust_torque << std::endl;
-            std::cout << "right_propeller_torque " << right_propeller_thrust_torque << std::endl;
 
         //}
 
@@ -445,7 +437,30 @@ void ASVDynamicsPlugin::OnUpdate()
         link->AddRelativeTorque(total_torque);
         //link->SetForce(total_force); // SetForce is the only apply force function that works for Bullet, but I think it the force vector is specified in the world frame
         //link->SetTorque(total_torque);
-        std::cout << "Total force " << total_force << std::endl;
-        std::cout << "Total torque " << total_torque << std::endl;
+
     //}
+
+#ifdef DEBUG_MESSAGES
+            std::cout << " pos " << pos << std::endl;
+            std::cout << " rot " << rot_euler << std::endl;
+            std::cout << "approx. volume_displaced_fluid " << volume_displaced_fluid << std::endl;
+            std::cout << "buoyancy_force (world frame)" << buoyancy_force << " with g=" << this->model->GetWorld()->Gravity().Z() << std::endl;
+            std::cout << "buoyancyforce_bodyframe " << buoyancyforce_bodyframe << " center_volume_displaced_fluid " << center_volume_displaced_fluid << std::endl;
+            std::cout << "buoyancytorque_bodyframe " << buoyancytorque_bodyframe << std::endl;
+            math::Vector3 linearvelocity_worldframe = link->GetWorldLinearVel();
+            std::cout << "linearvelocity_worldframe " << linearvelocity_worldframe << std::endl;
+            std::cout << "linearvelocity relative " << link->GetRelativeLinearVel()  << std::endl;
+            std::cout << " dampingforce " << dampingForce << std::endl;
+            std::cout << " angularvelocity_worldframe " << link->GetWorldAngularVel() << std::endl;
+            std::cout << " angularvelocity relative " << link->GetRelativeAngularVel() << std::endl;
+            std::cout << " dampingTorque " << dampingTorque << std::endl;
+            std::cout << "Relative torque " << link->GetRelativeTorque() << std::endl;
+            std::cout << "coriolis force " << coriolis_force << std::endl;
+            std::cout << "coriolis torque" << coriolis_torque << std::endl;
+            std::cout << " total_thrust_force " << (left_propeller_thrust_force + right_propeller_thrust_force) << std::endl;
+            std::cout << "left_propeller_torque " <<  left_propeller_thrust_torque << std::endl;
+            std::cout << "right_propeller_torque " << right_propeller_thrust_torque << std::endl;
+            std::cout << "Total force " << total_force << std::endl;
+            std::cout << "Total torque " << total_torque << std::endl;
+#endif
 }
