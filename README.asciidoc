@@ -1,0 +1,50 @@
+README
+======
+:Author: Danesh Tarapore
+:Email:  daneshtarapore@gmail.com
+:Date:   November 17th, 2016
+
+What is gazebo-asv?
+-------------------
+
+Gazebo-asv comprises models and  plugins to simulate the dynamics of an autonomous surface vehicle in 6-DoF (surge, sway, heave, roll, pitch and yaw).
+
+
+Downloading gazebo-asv
+----------------------
+
+You can download the sources of gazebo-asv through git:
+
+ $ git clone https://github.com/daneshtarapore/gazebo-asv.git gazebo-asv
+
+Compiling gazebo-asv
+--------------------
+
+Requirements and compiling instructions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Gazebo-asv requires the Gazebo simulator. Installation instructions for Gazebo can be found at http://gazebosim.org/tutorials?cat=install. The gazebo-asv has been tested on Gazebo7.
+
+
+Fast compiling instructions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ $ cd gazebo-asv
+ $ cd plugins/asvdynamics
+ $ mkdir build
+ $ cd build
+ $ cmake ..
+ $ make
+
+
+Running the gazebo-asv simulator
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Before running Gazebo, make sure the GAZEBO_MODEL_PATH environment variable points to gazebo-asv/models. Also the environment variable GAZEBO_PLUGIN_PATH should points to gazebo-asv/plugins/asvdynamics/build. 
+ 
+ $ cd gazebo-asv
+ $ gazebo -e ode --verbose worlds/surface.world -u --profile ode
+
+In the simulation example, gazebo-asv/worlds/surface.world describes a scenario with a single monohull dual-propeller ASV. The thrust forces applied on the two propellers are specified in plugins/asvdynamics/ASVDynamicsPlugin.cc. 
+
+Note that the gazebo-asv simulator has only been tested with the ODE physics engine (specified with the -e switch). The -u switch pauses the simulation after surface.world has been loaded. A profile detailing the physics parameters for Gazebo is specified in gazebo-asv/worlds/surface.world and selected with the --profile switch.   
