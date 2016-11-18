@@ -108,6 +108,9 @@ namespace gazebo
     /// \brief Damping linear coefficients
     protected: math::Vector3 dampingforcelinearcoefficients, dampingtorquelinearcoefficients;
 
+    /// \brief Propeller thrust forces
+    protected: double left_propeller_thrust, right_propeller_thrust;
+
     /// \brief Level of water in world
     protected: double water_level;
 

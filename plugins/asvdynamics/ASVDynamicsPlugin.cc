@@ -57,7 +57,8 @@ void ASVDynamicsPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
     center_volume_displaced_fluid.y = center_of_volume_boat.y;
     this->dampingforcelinearcoefficients  =  this->sdf->Get<math::Vector3>("damping_force_linear_coefficients");
     this->dampingtorquelinearcoefficients =  this->sdf->Get<math::Vector3>("damping_torque_linear_coefficients");
-
+    this->left_propeller_thrust           =  this->sdf->Get<double>("left_propeller_thrust");
+    this->right_propeller_thrust          =  this->sdf->Get<double>("right_propeller_thrust");
 
     //std::cout << "dampingtorquelinearcoefficients " << dampingtorquelinearcoefficients << std::endl;
 
@@ -395,29 +396,21 @@ void ASVDynamicsPlugin::OnUpdate()
             /*
              *  Thrust forces
              */
-            double left_propeller_thrust, right_propeller_thrust;
             if(model->GetWorld()->GetEntity("surfacevehicle")->IsSelected()) // Does not work
             {
                 std::cout << "Link is selected " << std::endl;
             }
 
-            left_propeller_thrust = 0.0f, right_propeller_thrust = 12.0f;
-
             math::Vector3 left_propeller_position =  math::Vector3(-0.029f, -0.0975f, 0.036f);
             math::Vector3 right_propeller_position = math::Vector3(-0.029f, +0.0975f, 0.036f);
 
-
             math::Vector3 left_propeller_thrust_force  = math::Vector3(left_propeller_thrust, 0.0f, 0.0f);
             math::Vector3 right_propeller_thrust_force = math::Vector3(right_propeller_thrust, 0.0f, 0.0f);
-
 
             //!link->AddLinkForce(left_propeller_thrust_force, left_propeller_position);
             //!link->AddLinkForce(right_propeller_thrust_force, right_propeller_position);
 
             total_force  += (left_propeller_thrust_force + right_propeller_thrust_force);
-
-
-
 
             math::Vector3 left_propeller_thrust_torque, right_propeller_thrust_torque;
             left_propeller_thrust_torque  = left_propeller_thrust_force.Cross(left_propeller_position - center_mass);

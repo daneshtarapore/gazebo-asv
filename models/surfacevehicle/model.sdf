@@ -10,7 +10,7 @@
         <!-- IF WE COULD SIMULATE ADDED MASS IN GAZEBO, THEN THE BELOW MASS MATRIX WOULD BE SET AS MASS OF RIGID BODY (MRB) + THE ADDED MASS (MA)-->
         <mass>3.0</mass>
         <!--<pose >-0.037 0 0.067 0 0 0</pose> -->  <!-- center of mass -->
-        <pose> -0.04 0 0.067  0 0 0</pose> <!-- center of mass -->
+        <pose> -0.037 0 0.067  0 0 0</pose> <!-- center of mass -->
         <inertia>
           <!-- scaling factor 1-->
           <ixx> 0.0245</ixx>
@@ -72,9 +72,11 @@
       <boat_volume>0.006994</boat_volume>
       <boat_boundingbox_volume>0.0252058</boat_boundingbox_volume>
       <boat_boundingbox_dimensions>0.653 0.386 0.10</boat_boundingbox_dimensions>
-      <boat_center_of_volume>-0.04 0.0 0.07</boat_center_of_volume>
+      <boat_center_of_volume>-0.0485 0.0 0.07</boat_center_of_volume> <!-- -0.0485f->-0.04f -->
       <damping_force_linear_coefficients>10.0 10.0 10.0</damping_force_linear_coefficients>
       <damping_torque_linear_coefficients>10.0 10.0 10.0</damping_torque_linear_coefficients>
+      <left_propeller_thrust>12.0</left_propeller_thrust>
+      <right_propeller_thrust>12.0</right_propeller_thrust>
     </plugin>
 
   </model>
