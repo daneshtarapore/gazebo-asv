@@ -45,6 +45,6 @@ Before running Gazebo, make sure the GAZEBO_MODEL_PATH environment variable poin
  $ cd gazebo-asv
  $ gazebo -e ode --verbose worlds/surface.world -u --profile ode
 
-In the simulation example, gazebo-asv/worlds/surface.world describes a scenario with a single monohull dual-propeller ASV. The thrust forces applied on the two propellers are specified in plugins/asvdynamics/ASVDynamicsPlugin.cc. 
+In the simulation example, gazebo-asv/worlds/surface.world describes a scenario with a single monohull dual-propeller ASV. The thrust forces applied on the two propellers are specified in models/surfacevehicle/model.sdf (xml tags: left_propeller_thrust and right_propeller_thrust). 
 
 Note that the gazebo-asv simulator has only been tested with the ODE physics engine (specified with the -e switch). The -u switch pauses the simulation after surface.world has been loaded. A profile detailing the physics parameters for Gazebo is specified in gazebo-asv/worlds/surface.world and selected with the --profile switch.   
