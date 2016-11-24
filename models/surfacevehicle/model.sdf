@@ -58,7 +58,7 @@
       <collision name='body_collision'>
         <geometry>
           <mesh>
-            <uri>model://surfacevehicle/meshes/proto7_cleaned_1.dae</uri>
+            <uri>model://surfacevehicle/meshes/proto7_meters.dae</uri>
           </mesh>
         </geometry>
       </collision>      

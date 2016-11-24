@@ -15,7 +15,7 @@
           <type>quick</type>
         </solver>
       </ode>
-      <max_step_size>0.0001</max_step_size>
+      <max_step_size>0.001</max_step_size> <!-- if boat explodes reduce max_step_size to 0.0001 -->
       <real_time_update_rate>0.000000</real_time_update_rate> <!--Description: Rate at which to update the physics engine (UpdatePhysics calls per real-time second). (was physics.sdf's update_rate).-->
     </physics>
 
@@ -26,7 +26,7 @@
           <iters>200</iters>
         </solver>
       </ode>
-      <max_step_size>0.0001</max_step_size>
+      <max_step_size>0.0001</max_step_size>  <!-- if boat explodes reduce max_step_size to 0.0001 -->
       <real_time_update_rate>0.000000</real_time_update_rate> <!--Description: Rate at which to update the physics engine (UpdatePhysics calls per real-time second). (was physics.sdf's update_rate).-->
     </physics>
 
@@ -37,7 +37,7 @@
           <iters>200</iters>
         </solver>
       </bullet>
-      <max_step_size>0.0001</max_step_size>
+      <max_step_size>0.0001</max_step_size>  <!-- if boat explodes reduce max_step_size to 0.0001 -->
       <real_time_update_rate>0.000000</real_time_update_rate>
     </physics>
 
@@ -104,8 +104,8 @@
     <include>
       <uri>model://surfacevehicle</uri>
       <!--<pose>3 -5 10    -0.1 -0.05 1.5</pose>-->  <!--world axis: +x (red), +y (green), +z (blue)    rotation along: x-axis, y-axis, z-axis -->
-      <!--<pose>3 -5 10    -0.4 +0.1 1.5</pose>-->  <!--world axis: +x (red), +y (green), +z (blue)    rotation along: x-axis, y-axis, z-axis -->
-      <pose>0 0 10    0 0 3.14159265359</pose>
+      <pose>3 -5 10    -0.4 +0.1 1.5</pose>  <!--world axis: +x (red), +y (green), +z (blue)    rotation along: x-axis, y-axis, z-axis -->
+      <!--<pose>0 0 10    0 0 3.14159265359</pose>-->
     </include>
 
     <!--<include>
