@@ -397,7 +397,7 @@ void ASVDynamicsPlugin::OnUpdate()
              *  Thrust forces
              */
             //if(model->GetWorld()->GetEntity("surfacevehicle_1")->IsSelected()) // Does not work
-            if(model->GetName().compare("surfacevehicle_1"))
+            if(model->GetName().compare("surfacevehicle_0"))
             {
                 left_propeller_thrust = 0.0f; right_propeller_thrust = 0.0f;
             }
@@ -433,6 +433,8 @@ void ASVDynamicsPlugin::OnUpdate()
         //link->SetTorque(total_torque);
 
     //}
+
+
 
 #ifdef DEBUG_MESSAGES
             std::cout << " pos " << pos << std::endl;
