@@ -396,9 +396,10 @@ void ASVDynamicsPlugin::OnUpdate()
             /*
              *  Thrust forces
              */
-            if(model->GetWorld()->GetEntity("surfacevehicle")->IsSelected()) // Does not work
+            //if(model->GetWorld()->GetEntity("surfacevehicle_1")->IsSelected()) // Does not work
+            if(model->GetName().compare("surfacevehicle_1"))
             {
-                std::cout << "Link is selected " << std::endl;
+                left_propeller_thrust = 0.0f; right_propeller_thrust = 0.0f;
             }
 
             math::Vector3 left_propeller_position =  math::Vector3(-0.029f, -0.0975f, 0.036f);

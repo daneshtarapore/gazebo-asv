@@ -100,18 +100,18 @@
       </link>
     </model>
 
-
     <include>
-      <uri>model://surfacevehicle</uri>
+      <uri>model://surfacevehicle_0</uri>
       <!--<pose>3 -5 10    -0.1 -0.05 1.5</pose>-->  <!--world axis: +x (red), +y (green), +z (blue)    rotation along: x-axis, y-axis, z-axis -->
-      <pose>3 -5 10    -0.4 +0.1 1.5</pose>  <!--world axis: +x (red), +y (green), +z (blue)    rotation along: x-axis, y-axis, z-axis -->
-      <!--<pose>0 0 10    0 0 3.14159265359</pose>-->
+      <!--<pose>3 -5 10    -0.4 +0.1 1.5</pose>-->  <!--world axis: +x (red), +y (green), +z (blue)    rotation along: x-axis, y-axis, z-axis -->
+      <pose>0 0 10    0 0 3.14159265359</pose>
     </include>
 
-    <!--<include>
-      <uri>model://surfacevehicle</uri>
-      <pose>-1 0 10    0 0 0 </pose>
-    </include>-->
+
+    <include>
+      <uri>model://surfacevehicle_1</uri>
+      <pose>-1 0.1 10    0 0 3.14159265359 </pose>
+    </include>
 
     <model name="ceiling_plane">
       <static>true</static>
