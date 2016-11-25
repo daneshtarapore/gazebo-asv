@@ -1,6 +1,11 @@
 #!/bin/bash
 
-NUM_ROBOTS=2
+if [ "$#" -ne 1 ]; then
+    echo "Number of robots in swarm not specified. Taking default value of 2"
+    NUM_ROBOTS=2
+else
+    NUM_ROBOTS=$1
+fi
 
 for (( i=0;i<$NUM_ROBOTS;i++)); do
     mkdir -p surfacevehicle_$i/meshes

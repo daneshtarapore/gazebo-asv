@@ -41,10 +41,22 @@ Running the gazebo-asv simulator
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Before running Gazebo, make sure the GAZEBO_MODEL_PATH environment variable points to gazebo-asv/models. Also the environment variable GAZEBO_PLUGIN_PATH should points to gazebo-asv/plugins/asvdynamics/build. 
+
+First create the Gazebo world by running create_swarm_world.py script. RNG_SEED is the random number generator seed used to randomly position NUM_ASV robots of the swarm. 
+
+ $ cd gazebo-asv/worlds
+ $ ./create_swarm_world.py RNG_SEED NUM_ASV
+
+Now create the ASV model files for each of the NUM_ASV robots of the swarm by running the create_swarm_asv_models.sh script
+
+ $ cd gazebo-asv/models
+ $ ./create_swarm_asv_models.sh NUM_ASV
+
+The simulation can now be run as follows:
  
  $ cd gazebo-asv
  $ gazebo -e ode --verbose worlds/surface.world -u --profile ode
 
-In the simulation example, gazebo-asv/worlds/surface.world describes a scenario with a single monohull dual-propeller ASV. The thrust forces applied on the two propellers are specified in models/surfacevehicle/model.sdf (xml tags: left_propeller_thrust and right_propeller_thrust). 
+In the simulation example, gazebo-asv/worlds/surface.world describes a scenario with NUM_ASV monohull dual-propeller ASVs. The thrust forces applied on the two propellers of robot X are specified in models/surfacevehicle_X/model.sdf (xml tags: left_propeller_thrust and right_propeller_thrust). 
 
 Note that the gazebo-asv simulator has only been tested with the ODE physics engine (specified with the -e switch). The -u switch pauses the simulation after surface.world has been loaded. A profile detailing the physics parameters for Gazebo is specified in gazebo-asv/worlds/surface.world and selected with the --profile switch.   

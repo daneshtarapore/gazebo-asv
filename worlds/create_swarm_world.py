@@ -7,7 +7,6 @@ world_file="surface.world"
 
 RNG_SEED=111
 
-NUM_ROBOTS=2
 
 ASV_POSITIONS=""
 
@@ -18,9 +17,18 @@ arena_min_y=-10.0
 arena_max_y=+10.0
 arena_water_level=10.0
 
-
+import sys
 
 random.seed(RNG_SEED)
+
+if len(sys.argv) == 3:
+    RNG_SEED=int(sys.argv[1])
+    NUM_ROBOTS=int(sys.argv[2])
+else :
+    print "Random number generator seed and number of robots not specified as argument. Taking default values of 111 for seed, and 2 for the number of robots in swarm"
+    RNG_SEED=111
+    NUM_ROBOTS=2
+
 
 for x in range(0, NUM_ROBOTS):
     x_pos=str(random.uniform(arena_min_x,arena_max_x))

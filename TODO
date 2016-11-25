@@ -1,6 +1,4 @@
 
-- Collision shape of mono-hull ASV. Currently there is a bug in collisions between ASVs -- they pass through each other.
-
 - Sensor plugins for the ASV: compass, GPS position sensor and Wi-Fi communication module.
 
 - Model plugin for the ASV controller
