@@ -68,8 +68,11 @@ namespace gazebo
     // Documentation inherited
     public: virtual void Init();
 
-    //protected: math::Box cBoundingBox;
+    /// \brief Set the thrust forces of the ASV's left and right propellers
+    public: void SetThrustForces(const double &_left_thrust, const double &_right_thrust);
 
+
+    ////////////////////////////////////////////////////////////////////////////////////
     protected: math::Vector3 center_volume_displaced_fluid;
 
     /// \brief Callback for World Update events.
@@ -117,6 +120,18 @@ namespace gazebo
     /// \brief The density of the fluid in which the object is submerged in
     /// kg/m^3. Defaults to 1000, the fluid density of water.
     protected: double fluidDensity;
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    /// \brief A node used for transport
+    private: transport::NodePtr node;
+
+    /// \brief A subscriber to a named topic.
+    private: transport::SubscriberPtr sub;
+
+    /// \brief Handle incoming message
+    /// \param[in] _msg Repurpose a vector3 message. This function will
+    /// only use the x and y components.
+    private: void OnMsg(ConstVector3dPtr &_msg);
   };
 }
 

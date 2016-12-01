@@ -25,8 +25,7 @@ int main(int _argc, char **_argv)
   node->Init();
 
   // Publish to the  velodyne topic
-  gazebo::transport::PublisherPtr pub =
-    node->Advertise<gazebo::msgs::Vector3d>("~/my_velodyne/vel_cmd");
+  gazebo::transport::PublisherPtr pub = node->Advertise<gazebo::msgs::Vector3d>("~/surfacevehicle_0/thrustforce_cmd");
 
   // Wait for a subscriber to connect to this publisher
   pub->WaitForConnection();
@@ -34,11 +33,11 @@ int main(int _argc, char **_argv)
   // Create a a vector3 message
   gazebo::msgs::Vector3d msg;
 
-  // Set the velocity in the x-component
+  // Set the thrust forces in the x-component (left thrust force) and y-component (right thrust force) of the message vector
 #if GAZEBO_MAJOR_VERSION < 6
-  gazebo::msgs::Set(&msg, gazebo::math::Vector3(std::atof(_argv[1]), 0, 0));
+  gazebo::msgs::Set(&msg, gazebo::math::Vector3(std::atof(_argv[1]), std::atof(_argv[2]), 0));
 #else
-  gazebo::msgs::Set(&msg, ignition::math::Vector3d(std::atof(_argv[1]), 0, 0));
+  gazebo::msgs::Set(&msg, ignition::math::Vector3d(std::atof(_argv[1]), std::atof(_argv[2]), 0));
 #endif
 
   // Send the message

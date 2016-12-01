@@ -22,6 +22,10 @@
 #include "gazebo/common/Assert.hh"
 #include "gazebo/common/Events.hh"
 #include "ASVDynamicsPlugin.hh"
+
+#include <gazebo/transport/transport.hh>
+#include <gazebo/msgs/msgs.hh>
+
 #include "gazebo/sensors/Sensor.hh"
 #include "gazebo/sensors/SensorManager.hh"
 
@@ -61,6 +65,18 @@ void ASVDynamicsPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
     this->dampingtorquelinearcoefficients =  this->sdf->Get<math::Vector3>("damping_torque_linear_coefficients");
     this->left_propeller_thrust           =  this->sdf->Get<double>("left_propeller_thrust");
     this->right_propeller_thrust          =  this->sdf->Get<double>("right_propeller_thrust");
+
+
+    // Create the node
+    this->node = transport::NodePtr(new transport::Node());
+    this->node->Init(this->model->GetWorld()->GetName());
+
+    // Create a topic name
+    std::string topicname = "~/" + this->model->GetName() + "/thrustforce_cmd";
+
+    // Subscribe to the topic, and register a callback
+    this->sub = this->node->Subscribe(topicname, &ASVDynamicsPlugin::OnMsg, this);
+
 
     //std::cout << "dampingtorquelinearcoefficients " << dampingtorquelinearcoefficients << std::endl;
 
@@ -166,6 +182,17 @@ void ASVDynamicsPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
         }
     }*/
 }
+/////////////////////////////////////////////////
+void ASVDynamicsPlugin::SetThrustForces(const double &_left_thrust, const double &_right_thrust)
+{
+    left_propeller_thrust = _left_thrust; right_propeller_thrust = _right_thrust;
+}
+
+/////////////////////////////////////////////////
+void ASVDynamicsPlugin::OnMsg(ConstVector3dPtr &_msg)
+  {
+    this->SetThrustForces(_msg->x(), _msg->y());
+  }
 
 /////////////////////////////////////////////////
 void ASVDynamicsPlugin::Init()
@@ -401,10 +428,10 @@ void ASVDynamicsPlugin::OnUpdate()
              *  Thrust forces
              */
             //if(model->GetWorld()->GetEntity("surfacevehicle_1")->IsSelected()) // Does not work
-            if(model->GetName().compare("surfacevehicle_0"))
+            /*if(model->GetName().compare("surfacevehicle_0"))
             {
                 left_propeller_thrust = 0.0f; right_propeller_thrust = 0.0f;
-            }
+            }*/
 
             math::Vector3 left_propeller_position =  math::Vector3(-0.029f, -0.0975f, 0.036f);
             math::Vector3 right_propeller_position = math::Vector3(-0.029f, +0.0975f, 0.036f);
