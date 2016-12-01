@@ -4,6 +4,7 @@
   <model name='surfacevehicle'>
     <pose>0 0 0 0 0 0</pose>
     <link name='body'>
+
       <!--<gravity>0</gravity>-->
       <pose>0 0 0 0 0 0</pose>
       <inertial>
@@ -46,8 +47,6 @@
         </inertia>
       </inertial>
 
-      
-
       <visual name='body_visual'>
         <geometry>
           <mesh>
@@ -81,7 +80,7 @@
       <damping_force_linear_coefficients>10.0 10.0 10.0</damping_force_linear_coefficients>
       <damping_torque_linear_coefficients>10.0 10.0 10.0</damping_torque_linear_coefficients>
       <left_propeller_thrust>1.0</left_propeller_thrust>
-      <right_propeller_thrust>1.0</right_propeller_thrust>
+      <right_propeller_thrust>12.0</right_propeller_thrust>
     </plugin>
 
   </model>

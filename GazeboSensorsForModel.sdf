@@ -1,0 +1,91 @@
+
+    <sensor type="gps" name="my_gps"> <!-- See http://sdformat.org/spec?ver=1.6&elem=sensor -->
+      <gps>
+        <position_sensing>
+          <horizontal>
+            <noise type="gaussian_quantized">
+              <mean>0.0</mean> <stddev>0.0</stddev> <bias_mean>0.0</bias_mean> <bias_stddev>0.0</bias_stddev> <precision>4</precision>
+            </noise>
+          </horizontal>
+          <vertical>
+            <noise type="gaussian_quantized">
+              <mean>0.0</mean> <stddev>0.0</stddev> <bias_mean>0.0</bias_mean> <bias_stddev>0.0</bias_stddev> <precision>4</precision>
+            </noise>
+          </vertical>
+        </position_sensing>
+        <velocity_sensing>
+          <horizontal>
+            <noise type="gaussian_quantized">
+              <mean>0.0</mean> <stddev>0.0</stddev> <bias_mean>0.0</bias_mean> <bias_stddev>0.0</bias_stddev> <precision>4</precision>
+            </noise>
+          </horizontal>
+          <vertical>
+            <noise type="gaussian_quantized">
+              <mean>0.0</mean> <stddev>0.0</stddev> <bias_mean>0.0</bias_mean> <bias_stddev>0.0</bias_stddev> <precision>4</precision>
+            </noise>
+          </vertical>
+        </velocity_sensing>
+      </gps>
+      <always_on>1</always_on>
+      <update_rate>30</update_rate>
+      <visualize>true</visualize>
+    </sensor>
+
+    <sensor type="magnetometer" name="my_magnetometer"> <!-- See http://sdformat.org/spec?ver=1.6&elem=sensor -->
+      <magnetometer>
+        <x>
+          <noise type="gaussian_quantized">
+            <mean>0.0</mean> <stddev>0.0</stddev> <bias_mean>0.0</bias_mean> <bias_stddev>0.0</bias_stddev> <precision>4</precision>
+          </noise>
+        </x>
+        <y>
+          <noise type="gaussian_quantized">
+            <mean>0.0</mean> <stddev>0.0</stddev> <bias_mean>0.0</bias_mean> <bias_stddev>0.0</bias_stddev> <precision>4</precision>
+          </noise>
+        </y>
+        <z>
+          <noise type="gaussian_quantized">
+            <mean>0.0</mean> <stddev>0.0</stddev> <bias_mean>0.0</bias_mean> <bias_stddev>0.0</bias_stddev> <precision>4</precision>
+          </noise>
+        </z>
+      </magnetometer>
+      <always_on>1</always_on>
+      <update_rate>30</update_rate>
+      <visualize>true</visualize>
+    </sensor>
+
+    <sensor type="wireless_transmitter" name="my_transmitter">
+    <!-- See http://sdformat.org/spec?ver=1.6&elem=sensor#sensor_transceiver and
+             http://www.newegg.com/Product/Product.aspx?Item=N82E16833704045 and
+             https://files.i4wifi.cz/inc/_doc/attach/StoItem/2120/en_manual.pdf -->
+      <transceiver>
+        <essid>"asv-wifi-nw"</essid>
+        <frequency>2400</frequency>
+        <min_frequency>2400</min_frequency>
+        <max_frequency>2484</max_frequency>
+        <gain>4</gain>
+        <power>19</power>
+        <sensitivity>1</sensitivity>
+      </transceiver>
+      <always_on>1</always_on>
+      <update_rate>30</update_rate>
+      <visualize>true</visualize>
+    </sensor>
+
+    <sensor type="wireless_receiver" name="my_receiver">
+    <!-- See http://sdformat.org/spec?ver=1.6&elem=sensor#sensor_transceiver and
+             http://www.newegg.com/Product/Product.aspx?Item=N82E16833704045 and
+             https://files.i4wifi.cz/inc/_doc/attach/StoItem/2120/en_manual.pdf -->
+      <transceiver>
+        <essid>"asv-wifi-nw"</essid>
+        <frequency>2400</frequency>
+        <min_frequency>2400</min_frequency>
+        <max_frequency>2484</max_frequency>
+        <gain>4</gain>
+        <power>19</power>
+        <sensitivity>1</sensitivity>
+      </transceiver>
+      <always_on>1</always_on>
+      <update_rate>30</update_rate>
+      <visualize>true</visualize>
+    </sensor>

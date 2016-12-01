@@ -22,6 +22,8 @@
 #include "gazebo/common/Assert.hh"
 #include "gazebo/common/Events.hh"
 #include "ASVDynamicsPlugin.hh"
+#include "gazebo/sensors/Sensor.hh"
+#include "gazebo/sensors/SensorManager.hh"
 
 using namespace gazebo;
 
@@ -168,6 +170,8 @@ void ASVDynamicsPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
 /////////////////////////////////////////////////
 void ASVDynamicsPlugin::Init()
 {
+    gazebo::sensors::SensorManager *mgr = gazebo::sensors::SensorManager::Instance();
+
     this->updateConnection = event::Events::ConnectWorldUpdateBegin(std::bind(&ASVDynamicsPlugin::OnUpdate, this));
 
     link = model->GetLink("body");
