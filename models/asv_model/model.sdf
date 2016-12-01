@@ -5,6 +5,35 @@
     <pose>0 0 0 0 0 0</pose>
     <link name='body'>
 
+    <sensor type="gps" name="gps"> <!-- See http://sdformat.org/spec?ver=1.6&elem=sensor -->
+    <plugin name="gpsplugin" filename="libgps.so"/>
+      <gps>
+        <position_sensing>
+          <horizontal>
+            <noise type="custom">
+            </noise>
+          </horizontal>
+          <vertical>
+            <noise type="custom">
+            </noise>
+          </vertical>
+        </position_sensing>
+        <velocity_sensing>
+          <horizontal>
+            <noise type="custom">
+            </noise>
+          </horizontal>
+          <vertical>
+            <noise type="custom">
+            </noise>
+          </vertical>
+        </velocity_sensing>
+      </gps>
+      <always_on>1</always_on>
+      <update_rate>30</update_rate>
+      <visualize>true</visualize>
+    </sensor>
+
       <!--<gravity>0</gravity>-->
       <pose>0 0 0 0 0 0</pose>
       <inertial>

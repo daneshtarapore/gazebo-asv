@@ -6,5 +6,5 @@ include_directories(${GAZEBO_INCLUDE_DIRS})
 link_directories(${GAZEBO_LIBRARY_DIRS})
 list(APPEND CMAKE_CXX_FLAGS "${GAZEBO_CXX_FLAGS}")
 
-add_library(gps SHARED GPSPlugin.cc)
+add_library(gps SHARED GpsPlugin.cc)
 target_link_libraries(gps ${GAZEBO_libraries})

@@ -12,10 +12,10 @@ namespace gazebo
   class GpsPlugin : public SensorPlugin
   {
     /// \brief Constructor.
-    public: GPSPlugin();
+    public: GpsPlugin();
 
     /// \brief Destructor.
-    public: virtual ~GPSPlugin();
+    public: virtual ~GpsPlugin();
 
     /// \brief Load the sensor plugin.
     /// \param[in] _sensor Pointer to the sensor that loaded this plugin.
@@ -31,6 +31,10 @@ namespace gazebo
     /// \brief Connection that maintains a link between the GPS sensor's
     /// updated signal and the OnUpdate callback.
     private: event::ConnectionPtr updateConnection;
+
+
+    private: double Perturb(int i, double val);
+
   };
 }
 #endif
