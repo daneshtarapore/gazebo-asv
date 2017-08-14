@@ -30,7 +30,7 @@ Fast compiling instructions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
  $ cd gazebo-asv
- $ cd plugins/asvdynamics
+ $ cd plugins/models/asvdynamics
  $ mkdir build
  $ cd build
  $ cmake ..
@@ -40,7 +40,7 @@ Fast compiling instructions
 Running the gazebo-asv simulator
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Before running Gazebo, make sure the GAZEBO_MODEL_PATH environment variable points to gazebo-asv/models. Also the environment variable GAZEBO_PLUGIN_PATH should points to gazebo-asv/plugins/asvdynamics/build. 
+Before running Gazebo, make sure the GAZEBO_MODEL_PATH environment variable points to gazebo-asv/models. Also the environment variable GAZEBO_PLUGIN_PATH should points to gazebo-asv/plugins/models/asvdynamics/build. 
 
 First create the Gazebo world by running create_swarm_world.py script. RNG_SEED is the random number generator seed used to randomly position NUM_ASV robots of the swarm. The template world file used is gazebo-asv/worlds/surface.template.world.
 
