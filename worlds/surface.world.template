@@ -130,7 +130,7 @@
           <material>
             <script>
               <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/BlueTransparentOverlay</name>
+              <name>Gazebo/Blue</name>
             </script>
           </material>
         </visual>

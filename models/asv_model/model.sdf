@@ -10,21 +10,21 @@
       <gps>
         <position_sensing>
           <horizontal>
-            <noise type="custom">
+            <noise type="none">
             </noise>
           </horizontal>
           <vertical>
-            <noise type="custom">
+            <noise type="none">
             </noise>
           </vertical>
         </position_sensing>
         <velocity_sensing>
           <horizontal>
-            <noise type="custom">
+            <noise type="none">
             </noise>
           </horizontal>
           <vertical>
-            <noise type="custom">
+            <noise type="none">
             </noise>
           </vertical>
         </velocity_sensing>
