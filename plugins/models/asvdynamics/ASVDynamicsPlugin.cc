@@ -207,7 +207,8 @@ void ASVDynamicsPlugin::Init()
     center_mass = link->GetInertial()->GetPose().pos;
 
     /*
-     * Added mass coefficients: If link->GetInertial()->GetMass() could give us a vector of masses (M_11, M_22, M_33), then added masses could be simulated. But as Gazebo does not allow this, for now we do not simulate the added mass.
+     * Added mass coefficients: If link->GetInertial()->GetMass() could give us a vector of masses (M_11, M_22, M_33), 
+     * then added masses could be simulated. But as Gazebo does not allow this, for now we do not simulate the added mass.
      */
     xu1 = -0.15f, yv1 = -38.2124, nr1 = -1.3597f;
 

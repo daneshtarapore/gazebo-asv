@@ -24,7 +24,7 @@ int main(int _argc, char **_argv)
   gazebo::transport::NodePtr node(new gazebo::transport::Node());
   node->Init();
 
-  // Publish to the  velodyne topic
+  // Publish to the thrustforce topic
   gazebo::transport::PublisherPtr pub = node->Advertise<gazebo::msgs::Vector3d>("~/surfacevehicle_0/thrustforce_cmd");
 
   // Wait for a subscriber to connect to this publisher
