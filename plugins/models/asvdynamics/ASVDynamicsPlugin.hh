@@ -25,8 +25,9 @@
 #include <map>
 #include "gazebo/common/Event.hh"
 #include "gazebo/common/Plugin.hh"
-#include "gazebo/math/Vector3.hh"
 #include "gazebo/physics/physics.hh"
+#include "ignition/math/Vector3.hh" //Replaces "gazebo/math/Vector3.hh" in Gazebo 8
+
 
 //#define DEBUG_MESSAGES
 
@@ -73,7 +74,7 @@ namespace gazebo
 
 
     ////////////////////////////////////////////////////////////////////////////////////
-    protected: math::Vector3 center_volume_displaced_fluid;
+    protected: ignition::math::Vector3d center_volume_displaced_fluid;
 
     /// \brief Callback for World Update events.
     protected: virtual void OnUpdate();
@@ -91,16 +92,16 @@ namespace gazebo
     protected: sdf::ElementPtr sdf;
 
     /// \brief Center of mass of boat
-    protected: math::Vector3 center_mass;
+    protected: ignition::math::Vector3d center_mass;
 
     /// \brief Volume of boat (courtesy of Meshlab), and volume of encompassing bounding box
     protected: double volume_of_boat, volume_of_boundingbox;
 
     /// \brief Dimensions of bounding box encompassing boat
-    protected: math::Vector3 cBoundingBoxLength;
+    protected: ignition::math::Vector3d cBoundingBoxLength;
 
     /// \brief Center of volume of boat
-    protected: math::Vector3 center_of_volume_boat;
+    protected: ignition::math::Vector3d center_of_volume_boat;
 
     /// \brief Added mass coefficients. If link->GetInertial()->GetMass() could give us a vector of masses (M_11, M_22, M_33), then added masses could be simulated. But as Gazebo does not allow this, for now we do not simulate the added mass. So please ignore these coefficients for now.
     protected: double xu1, yv1, nr1;
@@ -109,7 +110,7 @@ namespace gazebo
     protected: double m_rb, ixx_rb, iyy_rb, izz_rb, ixy_rb, ixz_rb, iyz_rb;
 
     /// \brief Damping linear coefficients
-    protected: math::Vector3 dampingforcelinearcoefficients, dampingtorquelinearcoefficients;
+    protected: ignition::math::Vector3d dampingforcelinearcoefficients, dampingtorquelinearcoefficients;
 
     /// \brief Propeller thrust forces
     protected: double left_propeller_thrust, right_propeller_thrust;

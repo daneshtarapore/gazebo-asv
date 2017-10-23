@@ -33,7 +33,7 @@ namespace gazebo
     private: event::ConnectionPtr updateConnection;
 
 
-    private: double Perturb(int i, double val);
+    //private: double Perturb(int i, double val);
 
   };
 }
