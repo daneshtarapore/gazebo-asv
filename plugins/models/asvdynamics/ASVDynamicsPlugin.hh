@@ -25,6 +25,7 @@
 #include <map>
 #include "gazebo/common/Event.hh"
 #include "gazebo/common/Plugin.hh"
+#include "gazebo/common/common.hh"
 #include "gazebo/physics/physics.hh"
 #include "ignition/math/Vector3.hh" //Replaces "gazebo/math/Vector3.hh" in Gazebo 8
 
@@ -121,7 +122,40 @@ namespace gazebo
     /// \brief The density of the fluid in which the object is submerged in
     /// kg/m^3. Defaults to 1000, the fluid density of water.
     protected: double fluidDensity;
+    
+    protected: const common::Mesh* surfaceMesh; 
+    
+    protected: float* surfaceMeshVertices;
+    
+    protected: int* surfaceMeshIndices;
+    
+    protected: unsigned int numSurfaceVertices;
+    
+    protected: unsigned int numSurfaceIndices;
+    
+    protected: const common::Mesh* vehicleMesh; 
+    
+    protected: float* vehicleMeshVertices;
 
+    //protected: float* vehicleVertices;
+    
+    protected: int* vehicleMeshIndices;
+    
+    protected: unsigned int numVehicleVertices;
+    
+    protected: unsigned int numVehicleIndices;
+    
+    protected: double prev_x;
+    
+    protected: double prev_y;
+    
+    protected: double prev_z;
+
+    protected: double prev_roll;
+
+    protected: double prev_pitch;
+
+    protected: double prev_yaw;
     ////////////////////////////////////////////////////////////////////////////////////
     /// \brief A node used for transport
     private: transport::NodePtr node;
